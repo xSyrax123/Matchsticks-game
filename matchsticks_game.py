@@ -11,7 +11,7 @@ class MatchsticksGame:
     def _show_matchsticks(self):
         return '||||| '*(self.matchsticks//5) + '|'*(self.matchsticks%5)
 
-    def get_move(self, player):
+    def _get_move(self, player):
         while True:
             try:
                 matchsticks_to_remove = int(input(f'{player} removes matchsticks: '))
@@ -36,7 +36,7 @@ class MatchsticksGame:
 
         while self.matchsticks > 0:
             self._play_turn()
-            matchsticks_to_remove = self.get_move(self.player)
+            matchsticks_to_remove = self._get_move(self.player)
             self.matchsticks -= matchsticks_to_remove
             print(self._show_matchsticks())
 
