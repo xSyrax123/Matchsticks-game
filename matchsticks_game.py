@@ -4,33 +4,33 @@ class MatchsticksGame:
         self.player2 = False
 
 
-    def __is_valid_input(self, player):
-        return True if 1 <= player <= 3 else False
+    def _is_valid_input(self, player):
+        return 1 <= player <= 3
             
 
-    def __show_matchsticks(self):
+    def _show_matchsticks(self):
         return '||||| '*(self.matchsticks//5) + '|'*(self.matchsticks%5)
 
 
-    def __game_finish(self):
-        return True if self.matchsticks <= 0 else False
+    def _game_finish(self):
+        return self.matchsticks <= 0
         
 
     def play(self):
         print('Game starts')
-        print(self.__show_matchsticks())
+        print(self._show_matchsticks())
 
         while True:
             player = int(input(f'The player {self.player2+1} remove: '))
 
-            if not self.__is_valid_input(player):
+            if not self._is_valid_input(player):
                 print('You can delete only between 1 and 3 matchsticks.')
                 continue
 
             self.matchsticks -= player
-            print(self.__show_matchsticks())
+            print(self._show_matchsticks())
 
-            if self.__game_finish():
+            if self._game_finish():
                 print(f'The player {self.player2+1} is eliminated.')
                 break
 
