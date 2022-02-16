@@ -9,7 +9,8 @@ class MatchsticksGame:
         return self.players[self.turn % 2]
 
     def _show_matchsticks(self):
-        return '||||| '*(self.matchsticks//5) + '|'*(self.matchsticks%5)
+        x, y = divmod(self.matchsticks, 5)
+        return '||||| '*(x) + '|'*(y)
 
     def _get_move(self, player):
         while True:
