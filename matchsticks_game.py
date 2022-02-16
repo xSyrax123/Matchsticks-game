@@ -1,4 +1,4 @@
-class Game:
+class MatchsticksGame:
     def __init__(self, players=('Player 1', 'Player 2'), initial_matchsticks=23):
         self.players = players
         self.player = None
@@ -46,5 +46,5 @@ class Game:
 
 
 if __name__ == '__main__':
-    game = Game()
+    game = MatchsticksGame()
     game.play()
