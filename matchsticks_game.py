@@ -1,6 +1,6 @@
 class MatchsticksGame:
-    def __init__(self, players=('Player 1', 'Player 2'), initial_matchsticks=23):
-        self.players = players
+    def __init__(self, initial_matchsticks=23):
+        self.players = ('Player 1', 'Player 2')
         self.player = None
         self.turn = 0
         self.matchsticks = initial_matchsticks
@@ -10,7 +10,7 @@ class MatchsticksGame:
 
     def _show_matchsticks(self):
         x, y = divmod(self.matchsticks, 5)
-        return '||||| '*(x) + '|'*(y)
+        return '||||| '*x + '|'*y
 
     def _get_move(self, player):
         while True:
