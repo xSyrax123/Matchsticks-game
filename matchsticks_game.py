@@ -1,53 +1,37 @@
-class MatchsticksGame:
-    def __init__(self, initial_matchsticks=23):
-        self.players = ('Player 1', 'Player 2')
-        self.player = None
-        self.turn = 0
-        self.matchsticks = initial_matchsticks
-    
-    @property
-    def _current_player(self):
-        return self.players[self.turn % 2]
+from collections import deque
 
-    def _matchsticks_str(self):
-        x, y = divmod(self.matchsticks, 5)
-        return '||||| '*x + '|'*y
 
-    def _get_move(self, player):
-        while True:
-            try:
-                matchsticks_to_remove = int(input(f'{player} removes matchsticks: '))
+def matchsticks_str(matchsticks):
+    x, y = divmod(matchsticks, 5)
+    return '||||| '*x + '|'*y
 
-                if 1 <= matchsticks_to_remove <= 3:
-                    return matchsticks_to_remove
-                else:
-                    print('You can delete only between 1 and 3 matchsticks.')
-            except ValueError:
-                print('The value entered is invalid. You can only enter numeric values.')
 
-    def _play_turn(self):
-        self.player = self._current_player
-        self.turn += 1
+def get_move(player, matchsticks):
+    max_value = min(3, matchsticks)
+    while True:
+        try:
+            value = int(input(f'{player} removes matchsticks: '))
 
-    @property
-    def _game_finished(self):
-        return self.matchsticks <= 0
+            if 1 <= value <= max_value:
+                return value
+            else:
+                print(f'You can delete only between 1 and {max_value} matchsticks.')
+        except ValueError:
+            print('The value entered is invalid. You can only enter numeric values.')
 
-    def play(self):
-        print('Game starts.')
-        print(self._matchsticks_str())
 
-        while self.matchsticks > 0:
-            self._play_turn()
-            matchsticks_to_remove = self._get_move(self.player)
-            self.matchsticks -= matchsticks_to_remove
-            print(self._matchsticks_str())
+def main(matchsticks=23):
+    players = deque(['Player 1', 'Player 2'])
+    print('Game starts.')
 
-            if self._game_finished:
-                print(f'{self.player} is eliminated.')
-                break
+    while matchsticks > 0:
+        print(matchsticks_str(matchsticks))
+        player = players[0]
+        matchsticks -= get_move(player, matchsticks)
+        players.rotate()
+
+    print(f'{player} is eliminated.')
 
 
 if __name__ == '__main__':
-    game = MatchsticksGame()
-    game.play()
+    main()
