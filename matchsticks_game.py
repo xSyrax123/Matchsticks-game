@@ -20,8 +20,8 @@ class MatchsticksGame:
 
                 if 1 <= matchsticks_to_remove <= 3:
                     return matchsticks_to_remove
-
-                print('You can delete only between 1 and 3 matchsticks.')
+                else:
+                    print('You can delete only between 1 and 3 matchsticks.')
             except ValueError:
                 print('The value entered is invalid. You can only enter numeric values.')
 
