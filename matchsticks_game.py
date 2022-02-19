@@ -4,11 +4,12 @@ class MatchsticksGame:
         self.player = None
         self.turn = 0
         self.matchsticks = initial_matchsticks
-
+    
+    @property
     def _current_player(self):
         return self.players[self.turn % 2]
 
-    def _show_matchsticks(self):
+    def _matchsticks_str(self):
         x, y = divmod(self.matchsticks, 5)
         return '||||| '*x + '|'*y
 
@@ -25,23 +26,24 @@ class MatchsticksGame:
                 print('The value entered is invalid. You can only enter numeric values.')
 
     def _play_turn(self):
-        self.player = self._current_player()
+        self.player = self._current_player
         self.turn += 1
 
+    @property
     def _game_finished(self):
         return self.matchsticks <= 0
 
     def play(self):
         print('Game starts.')
-        print(self._show_matchsticks())
+        print(self._matchsticks_str())
 
         while self.matchsticks > 0:
             self._play_turn()
             matchsticks_to_remove = self._get_move(self.player)
             self.matchsticks -= matchsticks_to_remove
-            print(self._show_matchsticks())
+            print(self._matchsticks_str())
 
-            if self._game_finished():
+            if self._game_finished:
                 print(f'{self.player} is eliminated.')
                 break
 
